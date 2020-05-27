@@ -1,14 +1,32 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Context } from '../context/BlogContext';
+import { MaterialIcons } from '@expo/vector-icons';
 
-const ShowScreen = () => {
+const ShowScreen = ({ navigation }) => {
+    const { state } = useContext(Context)
+    // const id = navigation.getParam('id')
+    const blogPost = state.find(
+        (blogPost) => blogPost.id === navigation.getParam('id')
+    )
     return (
         <View>
-            <Text>Shoe Screen</Text>
+            <Text>Show Screen</Text>
+            <Text>{blogPost.title}</Text>
         </View>
     )
 }
-const style = StyleSheet.create({
+
+ShowScreen.navigationOptions = ({navigation}) => {
+    return {
+        headerRight: () => {
+            <TouchableOpacity>
+                <MaterialIcons name="edit" size={30} color="black" />
+            </TouchableOpacity>
+        }
+    }
+}
+const styles = StyleSheet.create({
 
 })
 

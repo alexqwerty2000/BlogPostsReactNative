@@ -2,20 +2,21 @@ import React, { useContext } from 'react';
 import { Text, View, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native';
 import { Context } from '../context/BlogContext';
 import { Octicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const IndexScreen = ({navigation}) => {
     const {state, addBlogPost, deleteBlogPost } = useContext(Context)
 
     return (
         <View>
-            <Button title='Add post' onPress={ addBlogPost }/>
+            
             <FlatList 
                 data = {state}
                 keyExtractor = {(blogPost => blogPost.title)}
                 renderItem = {
                     ({item}) => {
                         return (
-                            <TouchableOpacity onPress = {() => navigation.navigate('Show')}>
+                            <TouchableOpacity onPress = {() => navigation.navigate('Show', { id: item.id})}>
                                 <View style = {styles.row}>
 
                                     <Text style = {styles.title}>{item.title} - {item.id}</Text>
@@ -30,6 +31,19 @@ const IndexScreen = ({navigation}) => {
             />
         </View>
     )
+}
+
+IndexScreen.navigationOptions = ({ navigation }) =>{
+    return {
+        headerRight: () =>  <TouchableOpacity 
+                                onPress = {() => navigation.navigate('Create')}
+                            >
+                                <MaterialCommunityIcons 
+                                    name="plus" 
+                                    size={35} 
+                                    color="black" />
+                           </TouchableOpacity>
+    }
 }
 
 const styles = StyleSheet.create({
