@@ -1,12 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Text, View, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native';
 import { Context } from '../context/BlogContext';
 import { Octicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const IndexScreen = ({navigation}) => {
-    const {state, addBlogPost, deleteBlogPost } = useContext(Context)
+    const {state, deleteBlogPost, getBlogPost } = useContext(Context)
 
+    useEffect(() =>{
+        getBlogPost()
+    }, [])
+    
     return (
         <View>
             
