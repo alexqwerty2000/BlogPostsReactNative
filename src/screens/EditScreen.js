@@ -12,6 +12,7 @@ const EditScreen = ({ navigation }) => {
         onSubmit = {(title, content) => {
             editBlogPost(blogPost.id, title, content, () => navigation.pop())
         }
+        
     }/>
 }
 
