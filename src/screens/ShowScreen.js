@@ -5,7 +5,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 const ShowScreen = ({ navigation }) => {
     const { state } = useContext(Context)
-    // const id = navigation.getParam('id')
     const blogPost = state.find(
         (blogPost) => blogPost.id === navigation.getParam('id')
     )
@@ -13,17 +12,20 @@ const ShowScreen = ({ navigation }) => {
         <View>
             <Text>Show Screen</Text>
             <Text>{blogPost.title}</Text>
+            <Text>{blogPost.content}</Text>
         </View>
     )
 }
 
-ShowScreen.navigationOptions = ({navigation}) => {
+ShowScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerRight: () => {
-            <TouchableOpacity>
-                <MaterialIcons name="edit" size={30} color="black" />
-            </TouchableOpacity>
-        }
+        headerRight: () =>  <TouchableOpacity 
+                                onPress = {() => 
+                                    navigation.navigate('Edit', {id: navigation.getParam('id')})
+                                }
+                            >
+                                <MaterialIcons name="edit" size={30} color="black" />
+                            </TouchableOpacity>
     }
 }
 const styles = StyleSheet.create({

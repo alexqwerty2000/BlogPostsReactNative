@@ -25,7 +25,7 @@ const IndexScreen = ({navigation}) => {
                                     </TouchableOpacity>
                                 </View>
                             </TouchableOpacity>
-                            )
+                        )
                     }
                 }
             />
